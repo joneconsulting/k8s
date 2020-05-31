@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sample
+  name: sample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: sample
+    spec:
+      containers:
+      - image: edowon0623/simple-devops-image
+        name: simple-devops-image
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: sample
+  name: sample
+spec:
+  ports:
+  - name: 9090-8080
+    port: 9090
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: sample
+  type: ClusterIP
+status:
+  loadBalancer: {}
