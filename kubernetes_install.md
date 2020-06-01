@@ -1,4 +1,5 @@
 ## 0. VirutalBox를 사용하기 위해 HyperV off
+  - 관리자 모드로 cmd(terminal) 실행
   - C:> bcdedit # 명령어로 현재 활성화되어 있는 기능 확인 
     - hypervisorlaunchtype Auto # off로 변경해야 VirualBox, VMware 설치 가능
   - C:> bcdedit /set hypervisorlaunchtype off
