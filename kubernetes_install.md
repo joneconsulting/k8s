@@ -116,6 +116,11 @@ $ systemctl enable --now kubelet
   ```
 $ kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=172.20.10.10
   ```
+    - 설치 성공 후 아래 커맨드 부분을 복사 (생성되는 값은 본인의 환경에 따라 다름)
+  ```  
+kubeadm join 172.20.10.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
+--discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322
+  ```
   - 환경 변수 설정
   ```
 $ mkdir -p $HOME/.kube
@@ -129,7 +134,7 @@ $ kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 $ kubectl get pods --all-namespaces
   ```
 ## 7. Kubernetes 노드 연결 - Node
-  - 연결
+  - 연결 (Master의 init 작업에서 복사 한 커맨드를 사용)
   ```
 $ kubeadm join 172.20.10.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 --discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322 
