@@ -133,17 +133,21 @@ $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
 $ kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 $ kubectl get pods --all-namespaces
   ```
-## 7. Kubernetes 노드 연결 - Node
+## 8. Kubernetes 노드 연결 - Node
   - 연결 (Master의 init 작업에서 복사 한 커맨드를 사용)
   ```
 $ kubeadm join 172.20.10.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
---discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322 
+--discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322  
+  ```
+  - 연결 시 오류 발생하면 kubeadm reset 명령어로 초기화 후 다시 실행 (Node에서)
+  ```
+$ kubeadm reset
   ```
   - 확인 (Master에서)
   ```
 $ kubectl get nodes
   ```
-## 8. Dashboard 설치 - Master
+## 9. Dashboard 설치 - Master
   - 설치 
   ```
 $ kubectl apply -f https://raw.githubusercontent.com/kubetm/kubetm.github.io/master/sample/practice/appendix/gcp-kubernetes-dashboard.yaml
@@ -156,7 +160,7 @@ $ nohup kubectl proxy --port=8001 --address=172.20.10.10 --accept-hosts='^*$' >/
   ```
 http://172.20.10.10:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
   ```
-## 9. 테스트
+## 10. 테스트
   - Pod 실행
   ```
 $ kubectl run nginx-test --image=nginx --port 80 --generator=run-pod/v1
