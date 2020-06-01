@@ -112,15 +112,15 @@ $ yum install -y --disableexcludes=kubernetes kubeadm-1.15.5-0.x86_64 kubectl-1.
   ```
 $ systemctl enable --now kubelet
   ```
+  - 초기화  
+  ```
+$ kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=172.20.10.10
+  ```
   - 환경 변수 설정
   ```
 $ mkdir -p $HOME/.kube
 $ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
-  ```
-  - 초기화  
-  ```
-$ kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=172.20.10.10
   ```
   - Calico 설치 (Kubernetes Cluster Networking plugin)
     - 기본적으로 192.68.0.0/16 대역 사용
