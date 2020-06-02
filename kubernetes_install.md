@@ -85,10 +85,10 @@ $ yum update
   - Hosts 파일 수정 
   ```
 $ vi /etc/hosts
-172.20.10.10 ansible-server
-172.20.10.11 jenkins-server
-172.20.10.12 tomcat-server
-172.20.10.13 docker-server
+192.168.56.10 ansible-server
+192.168.56.11 jenkins-server
+192.168.56.12 tomcat-server
+192.168.56.13 docker-server
 
 $ ping jenkins-server 
   ```
@@ -114,11 +114,11 @@ $ systemctl enable --now kubelet
   ```
   - 초기화  
   ```
-$ kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address=172.20.10.10
+$ kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=192.168.56.10
   ```
     - 설치 성공 후 아래 커맨드 부분을 복사 (생성되는 값은 본인의 환경에 따라 다름)
   ```  
-kubeadm join 172.20.10.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
+kubeadm join 192.168.56.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 --discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322
   ```
   - 환경 변수 설정
@@ -126,20 +126,27 @@ kubeadm join 172.20.10.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 $ mkdir -p $HOME/.kube
 $ sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 $ sudo chown $(id -u):$(id -g) $HOME/.kube/config
-  ```
-  - Calico 설치 (Kubernetes Cluster Networking plugin)
-    - 기본적으로 192.68.0.0/16 대역 사용
+$ kubectl get pods --all-namespaces # 모든 pods가 Running 상태인지 확인 
+  ```  
+  - Calico 기본 설치 (Kubernetes Cluster Networking plugin)    
   ```
 $ kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 $ kubectl get pods --all-namespaces
   ```
+  - Calico는 기본적으로 192.68.0.0/16 대역 사용하기 때문에, IP가 중복 될 경우에는 calico.yaml 파일을 다운로드 후 코드 수정, Calico 설치
+  ```
+$ curl -O https://docs.projectcalico.org/v3.8/manifests/calico.yaml  
+$ sed s/192.168.0.0\\/16/10.96.0.0\\/12/g -i calico.yaml
+$ kubectl apply -f calico.yaml
+  ```
+  
 ## 8. Kubernetes 노드 연결 - Node
   - 연결 (Master의 init 작업에서 복사 한 커맨드를 사용)
   ```
-$ kubeadm join 172.20.10.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
+$ kubeadm join 192.168.56.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 --discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322  
   ```
-  - 연결 시 오류 발생하면 kubeadm reset 명령어로 초기화 후 다시 실행 (Node에서)
+  - 연결 시 오류 발생하면 kubeadm reset 명령어로 초기화 후 다시 실행 (Node 모두 초기화)
   ```
 $ kubeadm reset
   ```
@@ -158,7 +165,7 @@ $ nohup kubectl proxy --port=8001 --address=172.20.10.10 --accept-hosts='^*$' >/
   ```
   - 접속
   ```
-http://172.20.10.10:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://192.168.56.10:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
   ```
 ## 10. 테스트
   - Pod 실행
@@ -176,6 +183,6 @@ $ kubectl edit service nginx-test # (ClusterIp -> NodePort)
   ```
   - 확인 (port는 service에서 forwarding 된 port 사용)
   ```
-http://172.20.10.10:30039/ # (<- port forwarding)
-http://172.20.10.11:30039/ # (<- port forwarding)
+http://192.168.56.10:30039/ # (<- port forwarding)
+http://192.168.56.11:30039/ # (<- port forwarding)
   ```
