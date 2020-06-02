@@ -133,7 +133,7 @@ $ kubectl get pods --all-namespaces # 모든 pods가 Running 상태인지 확인
 $ kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
 $ kubectl get pods --all-namespaces
   ```
-  - Calico는 기본적으로 192.68.0.0/16 대역 사용하기 때문에, IP가 중복 될 경우에는 calico.yaml 파일을 다운로드 후 코드 수정, Calico 설치
+  - Calico는 기본적으로 192.68.0.0/16 대역 사용하기 때문에, IP가 중복 될 경우에는 위의 방법 말고(kubectl apply) calico.yaml 파일을 다운로드 후 코드 수정, Calico 설치
   ```
 $ curl -O https://docs.projectcalico.org/v3.8/manifests/calico.yaml  
 $ sed s/192.168.0.0\\/16/10.96.0.0\\/12/g -i calico.yaml
