@@ -8,7 +8,7 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--memory", 2048]
     end
     cfg.vm.host_name="jenkins-server"
-    cfg.vm.synced_folder ".", "/vagrant", disabled: true
+    cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
     cfg.vm.network "private_network", ip: "192.168.56.11", bridge: "en0: Wi-Fi (AirPort)"
     cfg.vm.network "forwarded_port", guest: 22, host: 19211, auto_correct: false, id: "ssh"
     cfg.vm.network "forwarded_port", guest: 8080, host: 18080
@@ -24,7 +24,7 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--memory", 2048]
     end
     cfg.vm.host_name="tomcat-server"
-    cfg.vm.synced_folder ".", "/vagrant", disabled: true
+    cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
     cfg.vm.network "private_network", ip: "192.168.56.12", bridge: "en0: Wi-Fi (AirPort)"
     cfg.vm.network "forwarded_port", guest: 22, host: 19212, auto_correct: false, id: "ssh"
     cfg.vm.network "forwarded_port", guest: 8080, host: 28080
@@ -40,7 +40,7 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--memory", 2048]
     end
     cfg.vm.host_name="docker-server"
-    cfg.vm.synced_folder ".", "/vagrant", disabled: true
+    cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
     cfg.vm.network "private_network", ip: "192.168.56.13", bridge: "en0: Wi-Fi (AirPort)"
     cfg.vm.network "forwarded_port", guest: 22, host: 19213, auto_correct: false, id: "ssh"
     cfg.vm.network "forwarded_port", guest: 8080, host: 38080
@@ -56,7 +56,7 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--memory", 2048]
     end
     cfg.vm.host_name="ansible-server"
-    cfg.vm.synced_folder ".", "/vagrant"
+    cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
     cfg.vm.network "private_network", ip: "192.168.56.10", bridge: "en0: Wi-Fi (AirPort)"
     cfg.vm.network "forwarded_port", guest: 22, host: 19214, auto_correct: false, id: "ssh"
     cfg.vm.network "forwarded_port", guest: 8080, host: 48080
