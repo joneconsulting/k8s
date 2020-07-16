@@ -44,36 +44,36 @@ C:\Work\vagrant>vagrant ssh [Vagrant VM 이름]
 ## 4. 사전 준비 - Master, Node 모두
   - Root 계정 변경 (Password: vagrant)
   ```
-$ su - 
+su - 
   ```
   - SELinux 설정
   ```
-$ setenforce 0
-$ sestatus
-$ sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+setenforce 0
+sestatus
+sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
   ```
   - 방화벽 해제
   ```
-$ systemctl stop firewalld && systemctl disable firewalld
-$ systemctl stop NetworkManager && systemctl disable NetworkManager
+systemctl stop firewalld && systemctl disable firewalld
+systemctl stop NetworkManager && systemctl disable NetworkManager
   ```      
   - SWAP 비활성화 
   ```
-$ swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
+swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
   ```
   - Iptables 커널 옵션 활성화
   ```
-$ cat <<EOF >  /etc/sysctl.d/k8s.conf
+cat <<EOF >  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
   ```
   ```
-$ sysctl --system
+sysctl --system
   ```
   - 쿠버네티스를 위한 yum repository 설정
   ```
-$ cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
@@ -85,27 +85,28 @@ EOF
   ```
   - Centos Update
   ```
-$ yum update
+yum update
   ```
   - Hosts 파일 수정 
   ```
-$ vi /etc/hosts
+vi /etc/hosts
 192.168.56.10 ansible-server
 192.168.56.11 jenkins-server
 192.168.56.12 tomcat-server
 192.168.56.13 docker-server
 
-$ ping jenkins-server 
+ping jenkins-server 
   ```
 ## 5. Docker 설치, 실행 - Master, Node 모두
   ```
-$ yum install -y yum-utils device-mapper-persistent-data lvm2 
-$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-$ yum update && yum install docker-ce
-$ useradd dockeradmin
-$ passwd dockeradmin <-- password: dockeradmin
-$ usermod -aG docker dockeradmin
-$ systemctl enable --now docker && systemctl start docker
+yum install -y yum-utils device-mapper-persistent-data lvm2 
+yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+yum update && yum install docker-ce
+useradd dockeradmin
+
+passwd dockeradmin <-- password: dockeradmin
+usermod -aG docker dockeradmin
+systemctl enable --now docker && systemctl start docker
   ```
 ## 6. Kubernetes 설치 - Master, Node 모두
   - 설치
