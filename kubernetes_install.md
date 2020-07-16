@@ -108,6 +108,15 @@ passwd dockeradmin <-- password: dockeradmin
 usermod -aG docker dockeradmin
 systemctl enable --now docker && systemctl start docker
   ```
+
+## 5-1. Docker compose 설치
+  ```
+url -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+chmod +x /usr/local/bin/docker-compose
+ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+docker-compose -version 
+  ```
+
 ## 6. Kubernetes 설치 - Master, Node 모두
   - 설치
   ```
