@@ -1,0 +1,33 @@
+server {
+    listen {{ var "SERVER_PORT" | default "80" }} default_server;
+    server_name {{ var "SERVER_NAME" | default "localhost" }};
+    charset utf-8;
+
+    location /_nuxt/ {
+        alias /var/www/_nuxt/$1;
+        {{ if var "LOG_STDOUT" }}
+        access_log  /dev/stdout json;
+        error_log   /dev/stderr;
+        {{ else }}
+        access_log  /var/log/nginx/assets_access.log json;
+        error_log   /var/log/nginx/assets_error.log;
+        {{ end }}
+    }
+
+    location / {
+        proxy_pass http://backend;
+        proxy_pass_request_headers on;
+        proxy_set_header host $host;
+        {{ if var "LOG_STDOUT" }}
+        access_log  /dev/stdout json;
+        error_log   /dev/stderr;
+        {{ else }}
+        access_log  /var/log/nginx/backend_access.log json;
+        error_log   /var/log/nginx/backend_error.log;
+        {{ end }}
+        {{ if var "BASIC_AUTH_FILE" }}
+        auth_basic "Restricted";
+        auth_basic_user_file {{ var "BASIC_AUTH_FILE" }};
+        {{ end }}
+    }
+}

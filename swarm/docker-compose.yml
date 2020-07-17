@@ -1,0 +1,68 @@
+version: "3"
+services: 
+  registry:
+    container_name: registry
+    image: registry:latest
+    ports: 
+      - 5000:5000
+    volumes: 
+      - "./registry-data:/var/lib/registry"
+
+  manager:
+    container_name: manager
+    image: docker:19.03.5-dind
+    privileged: true
+    tty: true
+    ports:
+      - 8000:80
+      - 9000:9000
+    depends_on: 
+      - registry
+    expose: 
+      - 3375
+    command: "--insecure-registry registry:5000"
+    volumes: 
+      - "./stack:/stack"
+
+  worker01:
+    container_name: work01
+    image: docker:19.03.5-dind
+    privileged: true
+    tty: true
+    depends_on: 
+      - manager
+      - registry
+    expose: 
+      - 7946
+      - 7946/udp
+      - 4789/udp
+    command: "--insecure-registry registry:5000"
+
+  worker02:
+    container_name: work02
+    image: docker:19.03.5-dind
+    privileged: true
+    tty: true
+    depends_on: 
+      - manager
+      - registry
+    expose: 
+      - 7946
+      - 7946/udp
+      - 4789/udp
+    command: "--insecure-registry registry:5000"
+
+  worker03:
+    container_name: work03
+    image: docker:19.03.5-dind
+    privileged: true
+    tty: true
+    depends_on: 
+      - manager
+      - registry
+    expose: 
+      - 7946
+      - 7946/udp
+      - 4789/udp
+    command: "--insecure-registry registry:5000"
+      
