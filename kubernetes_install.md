@@ -180,7 +180,7 @@ $ nohup kubectl proxy --port=8000 --address=192.168.56.14 --accept-hosts='^*$' >
   ```
   - 접속
   ```
-http://192.168.56.10:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://192.168.56.14:8000/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
   ```
 ## 10. 테스트
   - Pod 실행
