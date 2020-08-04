@@ -176,7 +176,7 @@ $ kubectl apply -f https://raw.githubusercontent.com/kubetm/kubetm.github.io/mas
   ```
   - Proxy 설정
   ```
-$ nohup kubectl proxy --port=8001 --address=192.168.56.10 --accept-hosts='^*$' >/dev/null 2>&1 &
+$ nohup kubectl proxy --port=8000 --address=192.168.56.14 --accept-hosts='^*$' >/dev/null 2>&1 &
   ```
   - 접속
   ```
