@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: rest-post-app-service
+  labels:
+    app: rest-post-app-service
+spec:
+  ports:
+    - name: "8080"
+      port: 8082
+      targetPort: 9999
+  selector:
+    app: rest-post-app-service
+  type: NodePort

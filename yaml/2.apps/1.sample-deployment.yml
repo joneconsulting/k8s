@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-sample-app-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: rest-sample-app
+  template:
+    metadata:
+      labels:
+        app: rest-sample-app
+    spec:
+      containers:
+      - name: rest-sample-app
+        image: edowon0623/sample-mybatis:latest
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always

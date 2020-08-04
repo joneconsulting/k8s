@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: service-loadbalancing
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /users
+          backend:
+            serviceName: rest-sample-app-service
+            servicePort: 8081
+        - path: /posts
+          backend:
+            serviceName: rest-post-app-service
+            servicePort: 8082
