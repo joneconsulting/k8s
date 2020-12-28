@@ -117,6 +117,11 @@ ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose -version 
   ```
 
+## 5-2. Docker 설치 확인
+  ```
+  docker run hello-world
+  ```
+
 ## 6. Kubernetes 설치 - Master, Node 모두
   - 설치
   ```
