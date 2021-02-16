@@ -90,12 +90,11 @@ yum update
   - Hosts 파일 수정 
   ```
 vi /etc/hosts
-192.168.56.10 ansible-server
-192.168.56.11 jenkins-server
-192.168.56.12 tomcat-server
-192.168.56.13 docker-server
+192.168.56.10 master
+192.168.56.11 node1
+192.168.56.12 node2
 
-ping jenkins-server 
+ping master
   ```
 ## 5. Docker 설치, 실행 - Master, Node 모두
   ```
