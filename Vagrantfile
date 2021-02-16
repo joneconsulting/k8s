@@ -3,12 +3,12 @@ Vagrant.configure("2") do |config|
   config.vm.define:"node-1" do |cfg|
     cfg.vm.box = "centos/7"
     cfg.vm.provider:virtualbox do |vb|
-        vb.name="jenkins-server"
+        vb.name="node-1"
         vb.customize ["modifyvm", :id, "--cpus", 1]
         vb.customize ["modifyvm", :id, "--memory", 1024]
     end
-    cfg.vm.host_name="jenkins-server"
-    cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
+    cfg.vm.host_name="node1"
+    # cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
     #cfg.vm.network "private_network", ip: "192.168.56.11", bridge: "en0: Wi-Fi (AirPort)"
     cfg.vm.network "forwarded_port", guest: 22, host: 19211, auto_correct: false, id: "ssh"
     cfg.vm.network "forwarded_port", guest: 8080, host: 18080
@@ -19,12 +19,12 @@ Vagrant.configure("2") do |config|
   config.vm.define:"node-2" do |cfg|
     cfg.vm.box = "centos/7"
     cfg.vm.provider:virtualbox do |vb|
-        vb.name="tomcat-server"
+        vb.name="node-2"
         vb.customize ["modifyvm", :id, "--cpus", 1]
         vb.customize ["modifyvm", :id, "--memory", 1024]
     end
-    cfg.vm.host_name="tomcat-server"
-    cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
+    cfg.vm.host_name="node2"
+    # cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
     #cfg.vm.network "private_network", ip: "192.168.56.12", bridge: "en0: Wi-Fi (AirPort)"
     cfg.vm.network "forwarded_port", guest: 22, host: 19212, auto_correct: false, id: "ssh"
     cfg.vm.network "forwarded_port", guest: 8080, host: 28080
@@ -35,12 +35,12 @@ Vagrant.configure("2") do |config|
   config.vm.define:"master" do |cfg|
     cfg.vm.box = "centos/7"
     cfg.vm.provider:virtualbox do |vb|
-        vb.name="Ansible-Server"
+        vb.name="master"
         vb.customize ["modifyvm", :id, "--cpus", 2]
         vb.customize ["modifyvm", :id, "--memory", 2048]
     end
-    cfg.vm.host_name="ansible-server"
-    cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
+    cfg.vm.host_name="master"
+    # cfg.vm.synced_folder ".", "/vagrant", type: "nfs"
     #cfg.vm.network "private_network", ip: "192.168.56.10", bridge: "en0: Wi-Fi (AirPort)"
     cfg.vm.network "forwarded_port", guest: 22, host: 19214, auto_correct: false, id: "ssh"
     cfg.vm.network "forwarded_port", guest: 8080, host: 48080
