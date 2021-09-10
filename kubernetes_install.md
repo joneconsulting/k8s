@@ -106,7 +106,7 @@ yum update && yum install docker-ce
 useradd dockeradmin
 ```
 ```
-passwd dockeradmin <-- password: dockeradmin
+passwd dockeradmin # password --> dockeradmin
 ```
 ```
 usermod -aG docker dockeradmin
@@ -131,9 +131,10 @@ docker-compose -version
   ```
 yum install -y --disableexcludes=kubernetes kubeadm-1.15.5-0.x86_64 kubectl-1.15.5-0.x86_64 kubelet-1.15.5-0.x86_64
   ```
+  ```
 yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
   ```
-  ```
+  
 ## 7. Kubernetes 설정 - Master
   - 실행
   ```
