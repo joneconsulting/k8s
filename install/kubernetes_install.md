@@ -87,7 +87,7 @@ EOF
   ```
 yum update
   ```
-  - Hosts 파일 수정 
+  - Hosts 파일 수정 --> 각 노드의 ipaddress에 맞게 수정
   ```
 vi /etc/hosts
 192.168.56.10 master
