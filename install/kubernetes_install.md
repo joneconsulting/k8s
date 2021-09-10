@@ -44,7 +44,7 @@ C:\Work\vagrant>vagrant ssh [Vagrant VM 이름]
 ## 4. 사전 준비 - Master, Node 모두
   - Root 계정 변경 (Password: vagrant)
   ```
-su - 
+sudo su - 
   ```
   - SELinux 설정
   ```
