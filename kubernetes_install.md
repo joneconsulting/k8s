@@ -129,11 +129,11 @@ docker-compose -version
 ## 6. Kubernetes 설치 - Master, Node 모두
   - 1.15 버전 설치
   ```
-yum install -y --disableexcludes=kubernetes kubeadm-1.15.5-0.x86_64 kubectl-1.15.5-0.x86_64 kubelet-1.15.5-0.x86_64
+yum install -y kubeadm-1.15.5-0.x86_64 kubectl-1.15.5-0.x86_64 kubelet-1.15.5-0.x86_64 --disableexcludes=kubernetes 
   ```
-  - 최신 버전 설치
+  - 1.20 버전 설치
   ```
-yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+yum install -y kubeadm-1.20.5-0.x86_64 kubectl-1.20.5-0.x86_64 kubelet-1.20.5-0.x86_64l --disableexcludes=kubernetes
   ```
   
 ## 7. Kubernetes 설정 - Master
