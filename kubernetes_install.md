@@ -143,7 +143,7 @@ systemctl enable --now kubelet
   ```
   - 초기화  
   ```
-kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=192.168.56.10
+kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=<i>[master node ipaddress]</i>
   ```
     - 설치 성공 후 아래 커맨드 부분을 복사 (생성되는 값은 본인의 환경에 따라 다름)
   ```  
