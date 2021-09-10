@@ -101,7 +101,9 @@ ping master
 yum install -y yum-utils device-mapper-persistent-data lvm2 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum update && yum install docker-ce
+systemctl enable --now docker && systemctl start docker
 ```
+- dockeradmin 유저 생성 (optional)
 ```
 useradd dockeradmin
 ```
@@ -110,8 +112,7 @@ passwd dockeradmin # password --> dockeradmin
 ```
 ```
 usermod -aG docker dockeradmin
-systemctl enable --now docker && systemctl start docker
-  ```
+```
 
 ## 5-1. Docker compose 설치
   ```
