@@ -138,7 +138,7 @@ yum install -y kubeadm-1.20.5-0.x86_64 kubectl-1.20.5-0.x86_64 kubelet-1.20.5-0.
   ```
   
 ## 7. Kubernetes 설정 - Master
-  - 실행
+  - 실행 (** 실행 시 오류 발생하면 kubeadm init을 먼저 실행)
   ```
 systemctl enable --now kubelet
   ```
@@ -146,7 +146,7 @@ systemctl enable --now kubelet
   ```
 kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=*[master node ipaddress]*
   ```
-    - 설치 성공 후 아래 커맨드 부분을 복사 (생성되는 값은 본인의 환경에 따라 다름)
+  - 설치 성공 후 아래 커맨드 부분을 복사 (생성되는 값은 본인의 환경에 따라 다름)
   ```  
 kubeadm join 192.168.56.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 --discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322
