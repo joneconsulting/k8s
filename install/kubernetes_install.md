@@ -100,7 +100,7 @@ ping master
   ```
 yum install -y yum-utils device-mapper-persistent-data lvm2 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-yum update && yum install docker-ce
+yum install -y docker
 systemctl enable --now docker && systemctl start docker
 ```
 - dockeradmin 유저 생성 (optional)
@@ -134,7 +134,7 @@ yum install -y kubeadm-1.15.5-0.x86_64 kubectl-1.15.5-0.x86_64 kubelet-1.15.5-0.
   ```
   - 1.20 버전 설치
   ```
-yum install -y kubeadm-1.20.5-0.x86_64 kubectl-1.20.5-0.x86_64 kubelet-1.20.5-0.x86_64l --disableexcludes=kubernetes
+yum install -y kubeadm-1.20.5-0.x86_64 kubectl-1.20.5-0.x86_64 kubelet-1.20.5-0.x86_64 --disableexcludes=kubernetes
   ```
   
 ## 7. Kubernetes 설정 - Master
