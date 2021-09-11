@@ -44,7 +44,7 @@ C:\Work\vagrant>vagrant ssh [Vagrant VM 이름]
 ## 4. 사전 준비 - Master, Node 모두
   - Root 계정 변경 (Password: vagrant)
   ```
-su - 
+sudo su - 
   ```
   - SELinux 설정
   ```
@@ -87,7 +87,7 @@ EOF
   ```
 yum update
   ```
-  - Hosts 파일 수정 
+  - Hosts 파일 수정 --> 각 노드의 ipaddress에 맞게 수정
   ```
 vi /etc/hosts
 192.168.56.10 master
@@ -101,7 +101,9 @@ ping master
 yum install -y yum-utils device-mapper-persistent-data lvm2 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum update && yum install docker-ce
+systemctl enable --now docker && systemctl start docker
 ```
+- dockeradmin 유저 생성 (optional)
 ```
 useradd dockeradmin
 ```
@@ -110,8 +112,7 @@ passwd dockeradmin # password --> dockeradmin
 ```
 ```
 usermod -aG docker dockeradmin
-systemctl enable --now docker && systemctl start docker
-  ```
+```
 
 ## 5-1. Docker compose 설치
   ```
