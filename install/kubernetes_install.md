@@ -187,17 +187,15 @@ kubectl get nodes
 ## 9. Dashboard 설치 - Master
   - 설치 
   ```
-kubectl apply -f https://raw.githubusercontent.com/kubetm/kubetm.github.io/master/sample/practice/appendix/gcp-kubernetes-dashboard.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml
   ```
   - Proxy 설정
   ```
-nohup kubectl proxy --port=8000 --address=192.168.56.14 --accept-hosts='^*$' >/dev/null 2>&1 &
-nohup kubectl proxy --port=8000 --address=172.20.10.10 --accept-hosts='^*$' >/dev/null 2>&1 &
+nohup kubectl proxy --port=8000 --address=192.168.32.10 --accept-hosts='^*$' >/dev/null 2>&1 &
   ```
   - 접속
   ```
-http://192.168.56.14:8000/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-http://172.20.10.10:8000/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://192.168.32.10:8000/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
   ```
 ## 10. 테스트
   - Pod 실행
