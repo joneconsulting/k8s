@@ -41,9 +41,13 @@ C:\Work\vagrant>vagrant ssh [Vagrant VM 이름]
           ex) vagrant ssh k8s-master
   ```
 ## 4. 사전 준비 - Master, Node 모두
-  - Root 계정 변경 (Password: vagrant)
+  - Root 계정 변경 
   ```
 sudo su - 
+  ```
+  - Root Password 변경 (ex, vagrant로 변경)
+  ```
+passwd root  
   ```
   - SELinux 설정
   ```
