@@ -31,20 +31,23 @@ C:\Work\vagrant>vagrant up
   ```
 C:\Work\vagrant>vagrant status
       
-          # ansible-server -> Kubernetes Master
-          # jenkins-server -> Kubernetes Node1
-          # tomcat-server -> Kubernetes Node2
-          # docker-server -> Kubernetes Node3
+          # 192.168.32.10 -> Kubernetes Master
+          # 192.168.32.11 -> Kubernetes Node1
+          # 192.168.32.12 -> Kubernetes Node2
   ```
   - Vagrant VM 실행 
   ```
 C:\Work\vagrant>vagrant ssh [Vagrant VM 이름] 
-          ex) vagrant ssh jenkins-server
+          ex) vagrant ssh k8s-master
   ```
 ## 4. 사전 준비 - Master, Node 모두
-  - Root 계정 변경 (Password: vagrant)
+  - Root 계정 변경 
   ```
 sudo su - 
+  ```
+  - Root Password 변경 (ex, vagrant로 변경)
+  ```
+passwd root  
   ```
   - SELinux 설정
   ```
@@ -87,20 +90,26 @@ EOF
   ```
 yum update
   ```
-  - Hosts 파일 수정 --> 각 노드의 ipaddress에 맞게 수정
+  - Hostname 변경, Hosts 파일 수정 --> 각 노드의 ipaddress에 맞게 수정, Hostname 변경하지 않으면 kubeadm join 시 오류 발생
+  ```
+  192.168.32.10 -> hostname k8s-master
+  192.168.32.11 -> hostname k8s-node01
+  192.168.32.12 -> hostname k8s-node02
+  ```
   ```
 vi /etc/hosts
-192.168.56.10 master
-192.168.56.11 node1
-192.168.56.12 node2
-
-ping master
+192.168.32.10 k8s-master
+192.168.32.11 k8s-node01
+192.168.32.12 k8s-node02
+  ```
+  ```
+ping k8s-master
   ```
 ## 5. Docker 설치, 실행 - Master, Node 모두
-  ```
+```
 yum install -y yum-utils device-mapper-persistent-data lvm2 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-yum update && yum install docker-ce
+yum install -y docker
 systemctl enable --now docker && systemctl start docker
 ```
 - dockeradmin 유저 생성 (optional)
@@ -122,7 +131,7 @@ ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose -version 
   ```
 
-## 5-2. Docker 설치 확인
+## 5-2. Docker 설치 확인 (optional)
   ```
   docker run hello-world
   ```
@@ -134,29 +143,29 @@ yum install -y kubeadm-1.15.5-0.x86_64 kubectl-1.15.5-0.x86_64 kubelet-1.15.5-0.
   ```
   - 1.20 버전 설치
   ```
-yum install -y kubeadm-1.20.5-0.x86_64 kubectl-1.20.5-0.x86_64 kubelet-1.20.5-0.x86_64l --disableexcludes=kubernetes
+yum install -y kubeadm-1.20.5-0.x86_64 kubectl-1.20.5-0.x86_64 kubelet-1.20.5-0.x86_64 --disableexcludes=kubernetes
   ```
   
 ## 7. Kubernetes 설정 - Master
-  - 실행
+  - 실행 (** 실행 시 오류 발생하면 kubeadm init을 먼저 실행)
   ```
 systemctl enable --now kubelet
   ```
-  - 초기화  
+  - 초기화 (ex, Master ipaddress -> 192.168.32.10)
   ```
-kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=*[master node ipaddress]*
+kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=192.168.32.10
   ```
-    - 설치 성공 후 아래 커맨드 부분을 복사 (생성되는 값은 본인의 환경에 따라 다름)
+  - Node에서 실행, Kubeadm 실행 후 아래 커맨드 부분을 복사 (생성되는 값은 본인의 환경에 따라 다름)
   ```  
 kubeadm join 192.168.56.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 --discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322
   ```
-  - 환경 변수 설정
+  - 환경 변수 설정 -> 모든 pods가 Running 상태인지 확인 
   ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-kubectl get pods --all-namespaces # 모든 pods가 Running 상태인지 확인 
+kubectl get pods --all-namespaces
   ```  
   - Calico 기본 설치 (Kubernetes Cluster Networking plugin)    
   ```
@@ -187,17 +196,15 @@ kubectl get nodes
 ## 9. Dashboard 설치 - Master
   - 설치 
   ```
-kubectl apply -f https://raw.githubusercontent.com/kubetm/kubetm.github.io/master/sample/practice/appendix/gcp-kubernetes-dashboard.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml
   ```
   - Proxy 설정
   ```
-nohup kubectl proxy --port=8000 --address=192.168.56.14 --accept-hosts='^*$' >/dev/null 2>&1 &
-nohup kubectl proxy --port=8000 --address=172.20.10.10 --accept-hosts='^*$' >/dev/null 2>&1 &
+nohup kubectl proxy --port=8000 --address=192.168.32.10 --accept-hosts='^*$' >/dev/null 2>&1 &
   ```
   - 접속
   ```
-http://192.168.56.14:8000/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-http://172.20.10.10:8000/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+http://192.168.32.10:8000/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
   ```
 ## 10. 테스트
   - Pod 실행
