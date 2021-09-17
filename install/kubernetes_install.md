@@ -131,7 +131,7 @@ ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 docker-compose -version 
   ```
 
-## 5-2. Docker 설치 확인 (optional)
+## 5-2. Docker 설치 확인 (Optional)
   ```
   docker run hello-world
   ```
@@ -193,7 +193,7 @@ kubeadm reset
   ```
 kubectl get nodes
   ```
-## 9. Dashboard 설치 - Master
+## 9. Dashboard 설치(Optional) - Master
   - 설치 
   ```
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.3.1/aio/deploy/recommended.yaml
