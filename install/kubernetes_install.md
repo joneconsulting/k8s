@@ -45,7 +45,7 @@ C:\Work\vagrant>vagrant ssh [Vagrant VM 이름]
   ```
 sudo su - 
   ```
-  - Root Password 변경 (ex, vagrant로 변경) -> AWS EC2에 설치하는 경우 실행 X
+  - Root Password 변경 (ex, vagrant로 변경)
   ```
 passwd root  
   ```
@@ -96,7 +96,6 @@ yum update
   192.168.32.11 -> $ hostname k8s-node01
   192.168.32.12 -> $ hostname k8s-node02
   ```
-  - AWS EC2에 설치하는 경우에는 private ip address 사용
   ```
 vi /etc/hosts 
 192.168.32.10 k8s-master
@@ -113,7 +112,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install -y docker
 systemctl enable --now docker && systemctl start docker
 ```
-- dockeradmin 유저 생성 (optional) -> AWS EC2에 설치하는 경우 실행 O
+- dockeradmin 유저 생성 (optional)
 ```
 useradd dockeradmin
 ```
