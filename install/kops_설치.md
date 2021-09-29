@@ -90,10 +90,10 @@ kops edit ig nodes-<your AZ> --name ${NAME}
 ```
 kops update cluster ${NAME} --yes
 kops export kubecfg <your domain name ex. jonecluster.k8s.local> --admin
-kops export kubecfg ${NAME} --admin
+(or kops export kubecfg ${NAME} --admin)
 ```
 
-13. 클러스터 테스트 및 삭제
+13. 클러스터 테스트 
 ```
 kops validate cluster 
 ```
