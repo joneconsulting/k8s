@@ -38,21 +38,22 @@ pip3 install awscli (-> sudo apt install awscli)
 6. AWS CLI 설정
 ```
 aws configure
-AWS Access Key ID [None]: <Your access key id>
-AWS Secret Access Key [None]: <Your secret access key>
-Default region name [None]: ap-northeast-2 (or us-east-1)
-Default output format [None]:
+  AWS Access Key ID [None]: <Your access key id>
+  AWS Secret Access Key [None]: <Your secret access key>
+  Default region name [None]: ap-northeast-2 (or us-east-1)
+  Default output format [None]:
 ```
 ```
-aws ec2 describe-instances$ aws iam list-users
+aws ec2 describe-instances
+aws iam list-users
 ```
 
 7. S3 버킷 생성
 ```
 aws s3api create-bucket \
    --bucket <bucket name> \
-   --region ap-northeast-2 \
-   --create-bucket-configuration LocationConstraint=ap-northeast-2
+   --region <your region> \
+   --create-bucket-configuration LocationConstraint=<your region>
 aws s3api put-bucket-versioning \
    --bucket <bucket name> \
    --versioning-configuration Status=Enabled
@@ -62,14 +63,14 @@ aws s3api put-bucket-versioning \
 ```
 export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
 export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
-export NAME=jonecluster.k8s.local
-export KOPS_STATE_STORE=s3://jone-k8s-s3
+export NAME=<your domain name ex. jonecluster.k8s.local>
+export KOPS_STATE_STORE=s3://<your s3 bucket>
 ```
 
 9. SSH Key Pair 생성, 사용 가능한 AZ 확인
 ```
 ssh-keygen -t rsa
-aws ec2 describe-availability-zones --region us-east-1
+aws ec2 describe-availability-zones --region <your region>
 ```
 
 10. 클러스터 생성을 위한 AZ 지정
@@ -89,7 +90,7 @@ kops edit ig nodes-us-east-1c --name ${NAME}
 ```
 kops update cluster ${NAME} --yes
 (Optional)
-kops export kubecfg jonecluster.k8s.local --admin
+kops export kubecfg <your domain name ex. jonecluster.k8s.local> --admin
 kops export kubecfg ${NAME} --admin
 ```
 
