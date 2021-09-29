@@ -1,3 +1,9 @@
+* 가상머신 설치
+```
+Ubuntu 18.04 준비 (t2.micro)
+```
+
+* kops 설치
 ```
 wget -O kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
 ```
@@ -8,9 +14,25 @@ chmod +x ./kops
 sudo  mv  ./kops  /usr/local/bin/kops
 ```
 
+* kubectl 설치
+```
+```
 wget -O kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+```
+```
 chmod +x ./kubectl
+```
+```
 sudo mv ./kubectl /usr/local/bin/kubectl
+```
+
+* 내 보안 자격 증명 -> Group 생성 -> User 생성
+```
+AmazonEC2FullAccess, AmazonRoute53FullAccess, AmazonS3FullAccess, AmazonVPCFullAccess, IAMFullAccess
+```
+```
+액세스 키 만들기 (Access Key ID, Secret Access Key)
+```
 
 aws s3api create-bucket --bucket jone-k8s-s3 --region us-east-1
 sudo apt update
