@@ -75,15 +75,15 @@ aws ec2 describe-availability-zones --region <your region>
 
 10. 클러스터 생성을 위한 AZ 지정
 ```
-kops create cluster --zones us-east-1c ${NAME}
+kops create cluster --zones <your AZ> ${NAME}
 kops edit cluster ${NAME}
 kops get ig --name  ${NAME}
 ```
 
 11. 마스터 노드 확인, 노드 수 조절
 ```
-kops edit ig master-us-east-1c --name ${NAME}
-kops edit ig nodes-us-east-1c --name ${NAME}
+kops edit ig master-<your AZ> --name ${NAME}
+kops edit ig nodes-<your AZ> --name ${NAME}
 ```
 
 12. 클러스터 생성
