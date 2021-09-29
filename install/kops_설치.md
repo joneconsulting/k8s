@@ -66,18 +66,35 @@ export NAME=jonecluster.k8s.local
 export KOPS_STATE_STORE=s3://jone-k8s-s3
 ```
 
+9. SSH Key Pair 생성, 사용 가능한 AZ 확인
+```
 ssh-keygen -t rsa
 aws ec2 describe-availability-zones --region us-east-1
+```
 
+10. 클러스터 생성을 위한 AZ 지정
+```
 kops create cluster --zones us-east-1c ${NAME}
 kops edit cluster ${NAME}
 kops get ig --name  ${NAME}
+```
 
+11. 마스터 노드 확인, 노드 수 조절
+```
 kops edit ig master-us-east-1c --name ${NAME}
 kops edit ig nodes-us-east-1c --name ${NAME}
-kops update cluster ${NAME} --yes
+```
 
+12. 클러스터 생성
+```
+kops update cluster ${NAME} --yes
+(Optional)
 kops export kubecfg jonecluster.k8s.local --admin
 kops export kubecfg ${NAME} --admin
+```
 
+13. 클러스터 테스트 및 삭제
+```
 kops validate cluster 
+kops delete cluster --name ${NAME} --yes
+```
