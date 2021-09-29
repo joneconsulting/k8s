@@ -89,7 +89,6 @@ kops edit ig nodes-<your AZ> --name ${NAME}
 12. 클러스터 생성
 ```
 kops update cluster ${NAME} --yes
-(Optional)
 kops export kubecfg <your domain name ex. jonecluster.k8s.local> --admin
 kops export kubecfg ${NAME} --admin
 ```
@@ -97,5 +96,14 @@ kops export kubecfg ${NAME} --admin
 13. 클러스터 테스트 및 삭제
 ```
 kops validate cluster 
+```
+
+14. K8s Cluster 확인
+```
+kubectl get nodes
+```
+
+15. 클러스터 삭제
+```
 kops delete cluster --name ${NAME} --yes
 ```
