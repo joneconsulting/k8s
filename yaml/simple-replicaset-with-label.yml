@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: openvidu-spring
+  labels:
+    app: openvidu1
+    release: spring
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openvidu
+      release: spring
+  template:
+    metadata:
+      labels:
+        app: openvidu
+        release: spring
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        env:
+        - name: BACKEND_HOST
+          value: localhost:8080
+        ports:
+        - containerPort: 80
+      - name: echo
+        image: gihyodocker/echo:latest
+        ports:
+        - containerPort: 8080
+
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: openvidu-summer
+  labels:
+    app: openvidu2
+    release: summer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openvidu
+      release: summer
+  template:
+    metadata:
+      labels:
+        app: openvidu
+        release: summer
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        env:
+        - name: BACKEND_HOST
+          value: localhost:8080
+        ports:
+        - containerPort: 80
+      - name: echo
+        image: gihyodocker/echo:latest
+        ports:
+        - containerPort: 8080

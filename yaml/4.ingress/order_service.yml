@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: order-pod
+  labels:
+    category: order (service)
+    customer: id2 (service... )
+spec:
+  containers:
+  - name: order-container
+    image: kubetm/order
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-svc
+spec:
+  selector:
+    category: order
+  ports:
+  - port: 8080

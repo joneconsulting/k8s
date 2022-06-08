@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx-label
+spec:
+  selector:
+    matchLabels:
+      app: nginx-label
+  template:
+    metadata:
+      labels:
+        app: nginx-label
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx
+          volumeMounts:
+            - mountPath: /mydata-container
+              name: my-hostpath-volume
+      volumes:
+        - name: my-hostpath-volume
+          hostPath:
+            path: /Users/dowonlee/Desktop/git/seocho_blockchain/09.src/day17/mydata
+            type: Directory

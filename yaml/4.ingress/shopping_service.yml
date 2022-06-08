@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: shopping-pod
+  labels:
+    category: shopping
+spec:
+  containers:
+  - name: shopping-container
+    image: kubetm/shopping
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: shopping-svc
+spec:
+  selector:
+    category: shopping
+  ports:
+  - port: 8080

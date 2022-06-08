@@ -1,0 +1,10 @@
+FROM ubuntu:16.04
+
+RUN apt update
+RUN apt install -y vim
+
+RUN mkdir /mydata
+COPY test.sh /mydata
+RUN chmod +x /mydata/test.sh
+
+# ENTRYPOINT /mydata/test.sh

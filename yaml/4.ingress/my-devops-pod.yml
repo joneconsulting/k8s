@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: devops-api-pod
+  labels:
+    app: devops-api-pod
+spec:
+  containers:
+  - name: devops-api-server
+    image: edowon0623/devops-demo:3.0
+    ports:
+    - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-svc
+spec:
+  selector:
+    app: devops-api-pod
+  ports:
+  - port: 80

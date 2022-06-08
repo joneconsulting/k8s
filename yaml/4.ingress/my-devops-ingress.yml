@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata: 
+  name: my-devops-ingress
+spec:
+  rules:
+  - http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend: 
+            service:
+              name: devops-svc
+              port:
+                number: 80
+        - path: /welcome
+          pathType: Exact
+          backend: 
+            service:
+              name: devops-svc
+              port:
+                number: 80
+        - path: /customer
+          pathType: Exact
+          backend: 
+            service:
+              name: customer-svc
+              port:
+                number: 8080
+        - path: /order
+          pathType: Exact
+          backend: 
+              service:
+                name: order-svc
+                port:
+                  number: 8080

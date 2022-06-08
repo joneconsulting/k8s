@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-api-deployment
+  labels:
+    app: devops-api-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: devops-api
+  template:
+    metadata:
+      labels:
+        app: devops-api
+    spec:
+      containers:
+      - name: devops-api-server
+        image: edowon0623/devops-demo:5.1
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: devops-svc
+spec:
+  selector:
+    app: devops-api
+  ports:
+  - port: 80

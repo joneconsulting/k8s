@@ -1,9 +1,0 @@
-version: "3"
-services:
-  registry:
-    container_name: registry
-    image: registry:latest
-    ports:
-      - 5000:5000
-    volumes:
-      - "./registry-data:/var/lib/registry"

@@ -43,9 +43,9 @@ Vagrant.configure(Vagrant_API_Version) do |config|
     cfg.vm.synced_folder ".", "/vagrant"
     cfg.vm.network "private_network", ip: "192.168.32.10"
     cfg.vm.network "forwarded_port", guest: 22, host: 19022, auto_correct: false, id: "ssh"
-    cfg.vm.network "forwarded_port", guest: 80, host: 10080
-    cfg.vm.network "forwarded_port", guest: 8000, host: 18000
-    cfg.vm.network "forwarded_port", guest: 8001, host: 18001
+    cfg.vm.network "forwarded_port", guest: 80, host: 30080
+    cfg.vm.network "forwarded_port", guest: 8000, host: 38000
+    cfg.vm.network "forwarded_port", guest: 8001, host: 38001
     cfg.vm.provision "shell", path: "sshd_config.sh"
   end
 end

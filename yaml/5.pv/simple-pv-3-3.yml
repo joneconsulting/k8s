@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-volume-test
+spec:
+  containers:
+  - name: container
+    image: kubetm/init
+    volumeMounts:
+    - name: pvc-pv
+      mountPath: /my_mount
+  volumes:
+  - name : pvc-pv
+    persistentVolumeClaim:
+      claimName: dev-pvc
