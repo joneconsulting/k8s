@@ -205,7 +205,7 @@ kubectl get pods --all-namespaces
   ```  
   - Calico 기본 설치 (Kubernetes Cluster Networking plugin)    
   ```
-kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
 kubectl get pods --all-namespaces
   ```
   - Calico는 기본적으로 192.68.0.0/16 대역 사용하기 때문에, IP가 중복 될 경우에는 위의 방법 말고(kubectl apply) calico.yaml 파일을 다운로드 후 코드 수정, Calico 설치
