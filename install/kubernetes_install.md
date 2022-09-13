@@ -196,7 +196,7 @@ kubeadm init
 kubeadm join 192.168.56.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 --discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322
   ```
-  - 환경 변수 설정 -> 모든 pods가 Running 상태인지 확인 
+  - 환경 변수 설정 -> 모든 pods가 Running 상태인지 확인 (K8s-node를 Master에 Join 후 모든 PODS Running 중인지 확인)
   ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
