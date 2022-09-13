@@ -178,8 +178,6 @@ Unit kubelet.service entered failed state. kubelet.service failed.
   ```
   ```
 vi /usr/lib/systemd/system/docker.service  
-  ```
-  ```
 (ExecStart 항목에 아래 내용 추가)
 --exec-opt native.cgroupdriver=systemd
   ```
