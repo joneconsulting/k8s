@@ -110,6 +110,22 @@ ping k8s-master
 yum install -y yum-utils device-mapper-persistent-data lvm2 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 yum install -y docker
+```
+```
+cat <<EOF>> /etc/docker/daemon.json
+{
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ]
+}
+EOF
+```
+```
 systemctl enable --now docker && systemctl start docker
 ```
 - dockeradmin 유저 생성 (optional)
@@ -161,19 +177,12 @@ systemctl enable --kubelet
 Unit kubelet.service entered failed state. kubelet.service failed.
   ```
   ```
-cat <<EOF>> /etc/docker/daemon.json
-{
-  "exec-opts": ["native.cgroupdriver=systemd"],
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "100m"
-  },
-  "storage-driver": "overlay2",
-  "storage-opts": [
-    "overlay2.override_kernel_check=true"
-  ]
-}
-EOF
+vi /usr/lib/systemd/system/docker.service  
+  ```
+  ```
+(ExecStart 항목에 아래 내용 추가)
+--exec-opt native.cgroupdriver=systemd
+  ```
   ```
   - 초기화 (ex, Master ipaddress -> 192.168.32.10)
   ```
