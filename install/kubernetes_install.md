@@ -153,7 +153,27 @@ yum install -y kubeadm kubectl kubelet --disableexcludes=kubernetes
 ## 7. Kubernetes 설정 - Master
   - 실행 (** 실행 시 오류 발생하면 kubeadm init을 먼저 실행)
   ```
-systemctl enable --now kubelet
+systemctl start kubelet
+systemctl enable --kubelet
+  ```
+  - kubelet 시작 시 아래와 같은 오류 발생하는 경우, 
+  ```
+Unit kubelet.service entered failed state. kubelet.service failed.
+  ```
+  ```
+cat <<EOF>> /etc/docker/daemon.json
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true
+  ]
+}
+EOF
   ```
   - 초기화 (ex, Master ipaddress -> 192.168.32.10)
   ```
