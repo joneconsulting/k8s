@@ -181,7 +181,6 @@ vi /usr/lib/systemd/system/docker.service
 (ExecStart 항목에 아래 내용 추가)
 --exec-opt native.cgroupdriver=systemd
   ```
-  ```
   - 초기화 (ex, Master ipaddress -> 192.168.32.10)
   ```
 kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=192.168.32.10
