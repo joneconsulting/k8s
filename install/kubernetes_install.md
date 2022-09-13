@@ -170,7 +170,7 @@ cat <<EOF>> /etc/docker/daemon.json
   },
   "storage-driver": "overlay2",
   "storage-opts": [
-    "overlay2.override_kernel_check=true
+    "overlay2.override_kernel_check=true"
   ]
 }
 EOF
