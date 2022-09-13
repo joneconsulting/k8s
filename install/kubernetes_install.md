@@ -82,7 +82,7 @@ name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
 enabled=1
 gpgcheck=1
-repo_gpgcheck=1
+repo_gpgcheck=0
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
   ```
@@ -144,6 +144,10 @@ yum install -y kubeadm-1.15.5-0.x86_64 kubectl-1.15.5-0.x86_64 kubelet-1.15.5-0.
   - 1.20 버전 설치
   ```
 yum install -y kubeadm-1.20.5-0.x86_64 kubectl-1.20.5-0.x86_64 kubelet-1.20.5-0.x86_64 --disableexcludes=kubernetes
+  ```
+  - 최신 버전 설치
+  ```
+yum install -y kubeadm kubectl kubelet --disableexcludes=kubernetes
   ```
   
 ## 7. Kubernetes 설정 - Master
