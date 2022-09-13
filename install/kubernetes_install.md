@@ -1,5 +1,5 @@
 ```
-Vagrant를 사용하지 않고, 직접 VM을 구성하셔도 됩니다. (VirrualBox or VMWare)
+Vagrant를 사용하지 않고, 직접 VM을 구성하셔도 됩니다. (VirtualBox or VMWare)
 Windows 10의 Docker Desktop은 Cluster 구성이 되지 않기 때문에, VM사용을 권장합니다.
 ```
 
@@ -66,7 +66,7 @@ swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
   ```
   - Iptables 커널 옵션 활성화
   ```
-cat <<EOF >  /etc/sysctl.d/k8s.conf
+cat <<EOF>>  /etc/sysctl.d/k8s.conf
 net.bridge.bridge-nf-call-ip6tables = 1
 net.bridge.bridge-nf-call-iptables = 1
 EOF
@@ -76,7 +76,7 @@ sysctl --system
   ```
   - 쿠버네티스를 위한 yum repository 설정
   ```
-cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+cat <<EOF>> /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
 name=Kubernetes
 baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
