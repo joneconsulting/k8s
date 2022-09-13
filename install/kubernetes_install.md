@@ -185,7 +185,7 @@ vi /usr/lib/systemd/system/docker.service
   ```
 kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=192.168.32.10
   ```
-  - kubeadm init 실행 시 오류 발생 (Status from runtime service failed), 
+  - kubeadm init 실행 시 오류 발생 (Status from runtime service failed), kubeadm join 명령어 실행 시 오류가 발생해도 아래 명령어 실행
   ```
 rm /etc/containerd/config.toml
 systemctl restart containerd
