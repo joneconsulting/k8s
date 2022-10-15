@@ -170,7 +170,7 @@ yum install -y kubeadm kubectl kubelet --disableexcludes=kubernetes
   - 실행 (** 실행 시 오류 발생하면 kubeadm init을 먼저 실행)
   ```
 systemctl start kubelet
-systemctl enable --kubelet
+systemctl enable kubelet
   ```
   - kubelet 시작 시 아래와 같은 오류 발생하는 경우, 
   ```
