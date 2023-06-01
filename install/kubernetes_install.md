@@ -128,12 +128,11 @@ systemctl enable --now docker && systemctl start docker
 - dockeradmin 유저 생성 (optional)
 ```
 useradd dockeradmin
-```
-```
 passwd dockeradmin # password --> dockeradmin
-```
-```
 usermod -aG docker dockeradmin
+```
+```
+(usermod group 'docker' dose not exist 오류가 발생하면 sudo groupadd docker 명령어 실행 -> 다시 위 명령어 실행 -> systemctl restart docker)  
 ```
 
 ## 5-1. Docker compose 설치
