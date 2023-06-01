@@ -96,10 +96,13 @@ vi /etc/hosts
 192.168.32.11 k8s-node01
 192.168.32.12 k8s-node02
   ```
+  
+  (서버 재실행) 
+  
   ```
 ping k8s-master
   ```
-## 5. Docker 설치, 실행 - Master, Node 모두 (root 계정 권한 필요)
+## 5. Docker 설치, 실행 - Master, Node 모두
 ```
 yum install -y yum-utils device-mapper-persistent-data lvm2 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
