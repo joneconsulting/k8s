@@ -129,6 +129,8 @@ systemctl enable --now docker && systemctl start docker
 ```
 useradd dockeradmin
 passwd dockeradmin # password --> dockeradmin
+```
+```
 usermod -aG docker dockeradmin
 ```
 ```
