@@ -99,7 +99,7 @@ vi /etc/hosts
   ```
 ping k8s-master
   ```
-## 5. Docker 설치, 실행 - Master, Node 모두
+## 5. Docker 설치, 실행 - Master, Node 모두 (root 계정 권한 필요)
 ```
 yum install -y yum-utils device-mapper-persistent-data lvm2 
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
