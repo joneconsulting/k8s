@@ -1,14 +1,8 @@
 ```
 Vagrant를 사용하지 않고, 직접 VM을 구성하셔도 됩니다. (VirtualBox or VMWare)
-Windows 10의 Docker Desktop은 Cluster 구성이 되지 않기 때문에, VM사용을 권장합니다.
+Windows의 Docker Desktop은 Cluster 구성이 되지 않기 때문에, 가능하면 VM사용을 권장합니다.
 ```
 
-## 0. VirutalBox를 사용하기 위해 HyperV off
-  - 관리자 모드로 cmd(terminal) 실행
-  ```
-C:> bcdedit # 명령어로 현재 활성화되어 있는 기능 확인 
-        -> hypervisorlaunchtype Auto # off로 변경해야 VirualBox, VMware 설치 가능
-C:> bcdedit /set hypervisorlaunchtype off
   ```
 ## 1. Virtual Box 설치
   - https://www.virtualbox.org/
@@ -35,10 +29,11 @@ C:\Work\vagrant>vagrant status
           # 192.168.32.11 -> Kubernetes Node1
           # 192.168.32.12 -> Kubernetes Node2
   ```
-  - Vagrant VM 실행 
+  - Vagrant VM 실행
+    - $ vagrant ssh-config [vm name ex) k8s-node01]
   ```
 C:\Work\vagrant>vagrant ssh [Vagrant VM 이름] 
-          ex) vagrant ssh k8s-master
+          ex) vagrant ssh k8s-master 
   ```
 ## 4. 사전 준비 - Master, Node 모두
   - Root 계정 변경 
