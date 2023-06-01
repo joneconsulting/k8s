@@ -3,7 +3,6 @@ Vagrant를 사용하지 않고, 직접 VM을 구성하셔도 됩니다. (Virtual
 Windows의 Docker Desktop은 Cluster 구성이 되지 않기 때문에, 가능하면 VM사용을 권장합니다.
 ```
 
-  ```
 ## 1. Virtual Box 설치
   - https://www.virtualbox.org/
 ## 2. Vagrant 설치
