@@ -57,6 +57,7 @@ systemctl stop NetworkManager && systemctl disable NetworkManager
   - SWAP 비활성화 
   ```
 swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab
+swapoff -a && sed -i '/swap/s/^/#/' /etc/fstab
   ```
   - Iptables 커널 옵션 활성화
   ```
