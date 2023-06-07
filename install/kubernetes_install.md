@@ -231,7 +231,7 @@ kubectl get nodes
 ## 9. 테스트
   - Pod 실행
   ```
-kubectl run nginx-test --image=nginx --port 80 --generator=run-pod/v1
+kubectl run nginx-test --image=nginx --port 80
   ```
   - Service 실행
   ```
