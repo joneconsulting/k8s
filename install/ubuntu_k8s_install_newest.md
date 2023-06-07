@@ -60,7 +60,7 @@ EOF
   ```
 sysctl --system
   ```
-  - Hostname 변경, Hosts 파일 수정 --> 각 노드의 ipaddress에 맞게 수정, Hostname 변경하지 않으면 kubeadm join 시 오류 발생
+  - Hostname 변경(Vagrantfile에서 변경 됨), Hosts 파일 수정 --> 각 노드의 ipaddress에 맞게 수정, Hostname 변경하지 않으면 kubeadm join 시 오류 발생
   ```
   192.168.32.10 -> $ hostname k8s-master (or $ hostnamectl set-hostname k8s-master)
   192.168.32.11 -> $ hostname k8s-node01
