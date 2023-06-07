@@ -191,7 +191,7 @@ kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=192.1
 kubeadm join 192.168.32.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 --discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322
   ```
-  - Calico 기본 설치 (Kubernetes Cluster Networking plugin, 2023-06-07 기준 3.25버전)    
+  - Network add-on - Calico 기본 설치 (Kubernetes Cluster Networking plugin, 2023-06-07 기준 3.25버전)    
   ```
 curl https://docs.projectcalico.org/archive/v3.25/manifests/calico.yaml -O --insecure
 kubectl apply -f calico.yaml
