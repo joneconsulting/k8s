@@ -191,19 +191,18 @@ kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=192.1
 kubeadm join 192.168.32.10:6443 --token x1qogf.3i1d8zc267sm4gq8 \
 --discovery-token-ca-cert-hash sha256:1965b56832292d3de10fc95f92b8391334d9404c914d407baa2b6cec1dbe5322
   ```
-  - Network add-on - Calico 기본 설치 (Kubernetes Cluster Networking plugin, 2023-06-07 기준 3.25버전)    
-  ```
-curl https://docs.projectcalico.org/archive/v3.25/manifests/calico.yaml -O --insecure
-kubectl apply -f calico.yaml
-kubectl get pods --all-namespaces
-  ```
   - kubectl을 root 계정없이 실행 
   ```
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
   ```  
-  
+  - Network add-on - Calico 기본 설치 (Kubernetes Cluster Networking plugin, 2023-06-07 기준 3.25버전)    
+  ```
+curl https://docs.projectcalico.org/archive/v3.25/manifests/calico.yaml -O --insecure
+kubectl apply -f calico.yaml
+kubectl get pods --all-namespaces
+  ```
 ## 9. Kubernetes 노드 연결 - Node
   - 연결 (Master의 init 작업에서 복사 한 커맨드를 사용)
   ```
