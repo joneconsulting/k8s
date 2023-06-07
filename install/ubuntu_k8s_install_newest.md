@@ -104,8 +104,8 @@ docker version
 ```
 - Docker 서비스 등록
 ```
-systemctl status docker 
 systemctl enable docker
+systemctl status docker 
 ```
 - dockeradmin 유저 생성 (optional)
 ```
