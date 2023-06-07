@@ -181,7 +181,7 @@ systemctl restart containerd
 kubeadm config images pull
   ```    
 ## 8. Kubernetes 설정 - Master
-  - 초기화 (ex, Master ipaddress -> 192.168.32.10)
+  - 초기화 (apiserver-advertise-address는 Master ipaddress -> 192.168.32.10)
   ```
 kubeadm reset
 kubeadm init --pod-network-cidr=10.96.0.0/16 --apiserver-advertise-address=192.168.32.10
