@@ -1,4 +1,8 @@
-FROM ubuntu:16.04
+FROM python:3.7.9-stretch
 
-RUN mkdir /mydata
-COPY test.txt /mydata
+WORKDIR /mydata
+RUN pip install numpy
+# COPY ./test.py ./test.py
+# CMD ["python", "test.py"]
+
+CMD python ${EXEC_FILE}
